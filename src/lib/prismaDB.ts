@@ -1,17 +1,23 @@
 import { PrismaClient } from '@prisma/client';
-import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
-const adapter = new PrismaMariaDb();
+let adapter: any = undefined;
+try {
+  const { PrismaMariaDb } = require('@prisma/adapter-mariadb');
+  const dbUrl = process.env.DATABASE_URL || '';
+  adapter = new PrismaMariaDb(dbUrl);
+} catch (err) {
+  console.warn('Could not load @prisma/adapter-mariadb:', err?.message || err);
+}
 
 export const prisma =
   global.prisma ||
   new PrismaClient({
     log: ['query'],
-    adapter,
+    ...(adapter ? { adapter } : {}),
   });
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma;

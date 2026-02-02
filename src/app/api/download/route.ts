@@ -2,7 +2,7 @@ import { createReadStream } from "fs";
 import path from "path";
 
 export async function GET(req: Request) {
-  const fileUrl = "https://github.com/Charter-Informatika/AiMail/releases/download/1.2.4/aimail-Setup-1.2.4.exe";
+  const fileUrl = "https://github.com/Charter-Informatika/AiMail/releases/download/1.2.5/aimail-Setup-1.2.5.exe";
   return new Response(null, {
     status: 302,
     headers: {

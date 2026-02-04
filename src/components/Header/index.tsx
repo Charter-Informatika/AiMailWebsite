@@ -1,3 +1,5 @@
+"use client";
+
 import GlobalSearchModal from "@/components/GlobalSearch";
 import DarkModeSwitcher from "@/components/Header/DarkModeSwitcher";
 import { Menu } from "@/types/menu";

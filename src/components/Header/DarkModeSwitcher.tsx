@@ -1,16 +1,25 @@
+"use client";
+
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function DarkModeSwitcher() {
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <button
       onClick={() => {
         setTheme(theme === "light" ? "dark" : "light");
       }}
+      aria-label="Toggle dark mode"
     >
       <span className="sr-only">
-        Switch to {theme === "light" ? "dark" : "light"} mode
+        {mounted ? `Switch to ${theme === "light" ? "dark" : "light"} mode` : "Toggle theme"}
       </span>
 
       <span className="block dark:hidden">

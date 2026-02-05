@@ -37,10 +37,10 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
         >
-          <div className="isolate">
+          <div className="isolate flex min-h-screen flex-col">
             <AuthProvider>
               <Header />
-              <div className="isolate">{children}</div>
+              <div className="isolate flex-grow">{children}</div>
               <Footer />
             </AuthProvider>
           </div>

@@ -54,7 +54,7 @@ const HeroArea = () => {
                 <Image
                   width={990}
                   height={546}
-                  src={"/images/hero/dashboard_light.png"}
+                  src={"/images/hero/dashboard.png"}
                   alt="hero image"
                   className="block dark:hidden"
             
@@ -62,7 +62,7 @@ const HeroArea = () => {
                 <Image
                   width={990}
                   height={546}
-                  src={"/images/hero/dashboard_dark.png"}
+                  src={"/images/hero/dashboard.png"}
                   alt="hero image"
                   className="hidden dark:block"
                   style={{ width: "auto", height: "auto" }}

@@ -73,7 +73,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/fooldal_dark.png"}
+                    src={"/images/screens/inbox.png"}
                     alt="screenshot 2"
                     className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
@@ -81,7 +81,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/fooldal_light.png"}
+                    src={"/images/screens/inbox.png"}
                     alt="screenshot 2 dark"
                     className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
@@ -95,7 +95,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/level_szerkesztes_dark.png"}
+                    src={"/images/screens/inbox2.png"}
                     alt="screenshot 1"
                     className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
@@ -103,7 +103,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/level_szerkeztes_light.png"}
+                    src={"/images/screens/inbox2.png"}
                     alt="screenshot 1 dark"
                     className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
@@ -117,7 +117,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/level_szerkezet_dark.png"}
+                    src={"/images/screens/pre.png"}
                     alt="screenshot 3"
                     className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
@@ -125,7 +125,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/level_szerkezet_light.png"}
+                    src={"/images/screens/pre.png"}
                     alt="screenshot 3 dark"
                     className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
@@ -139,7 +139,7 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/level_be_dark.png"}
+                    src={"/images/screens/pre2.png"}
                     alt="screenshot 4"
                     className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
@@ -147,7 +147,51 @@ const Screens = () => {
                   <Image
                     width={900}
                     height={1800}
-                    src={"/images/screens/level_be_light.png"}
+                    src={"/images/screens/pre2.png"}
+                    alt="screenshot 4 dark"
+                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    onLoad={handleImageLoad}
+                  />
+                </div>
+              </SwiperSlide>
+
+              {/* Slide 4: level_be */}
+              <SwiperSlide>
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                  <Image
+                    width={900}
+                    height={1800}
+                    src={"/images/screens/data.png"}
+                    alt="screenshot 4"
+                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    onLoad={handleImageLoad}
+                  />
+                  <Image
+                    width={900}
+                    height={1800}
+                    src={"/images/screens/data.png"}
+                    alt="screenshot 4 dark"
+                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    onLoad={handleImageLoad}
+                  />
+                </div>
+              </SwiperSlide>
+
+              {/* Slide 4: level_be */}
+              <SwiperSlide>
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                  <Image
+                    width={900}
+                    height={1800}
+                    src={"/images/screens/struct.png"}
+                    alt="screenshot 4"
+                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    onLoad={handleImageLoad}
+                  />
+                  <Image
+                    width={900}
+                    height={1800}
+                    src={"/images/screens/struct.png"}
                     alt="screenshot 4 dark"
                     className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}

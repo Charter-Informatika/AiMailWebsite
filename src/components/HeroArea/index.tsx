@@ -41,7 +41,6 @@ const HeroArea = () => {
                     </span>
                   </Link>
 
-                  
                 </div>
               </div>
             </div>

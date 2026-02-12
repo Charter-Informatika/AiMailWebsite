@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import jwt from "jsonwebtoken";
 
 const VALID_API_KEYS = [
   process.env.DESKTOP_API_KEY,
@@ -83,10 +84,20 @@ export async function validateRequest(req: NextRequest): Promise<NextResponse | 
   if (authHeader && authHeader.startsWith("Bearer ")) {
     // Van session token — engedjük tovább, részletes egyezést az egyes route-ok ellenőrzik
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    if (token) return null;
+
+    // Fallback: some clients send a raw Bearer JWT in Authorization header
+    // Try to verify it manually using the same secret.
+    try {
+      const raw = authHeader.slice(7).trim();
+      const secret = process.env.NEXTAUTH_SECRET || process.env.SECRET || "";
+      if (!secret) throw new Error('No secret configured');
+      const verified = jwt.verify(raw, secret);
+      if (verified) return null;
+    } catch (e) {
+      console.warn('[API Auth] manual JWT verify failed:', e?.message || e);
       return NextResponse.json({ success: false, error: "Érvénytelen bejelentkezés." }, { status: 401 });
     }
-    return null;
   }
 
   // Ha nincs session, kötelező az API kulcs

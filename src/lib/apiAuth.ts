@@ -113,7 +113,24 @@ export async function validateRequest(req: NextRequest): Promise<NextResponse | 
 export async function getSessionFromRequest(req: NextRequest) {
   try {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-    return token || null;
+    if (token) return token;
+
+    // Fallback: try to parse Authorization Bearer JWT and return its payload
+    const authHeader = req.headers.get('authorization') || '';
+    if (authHeader.startsWith('Bearer ')) {
+      try {
+        const raw = authHeader.slice(7).trim();
+        const secret = process.env.NEXTAUTH_SECRET || process.env.SECRET || '';
+        if (!secret) throw new Error('No secret configured for JWT verification');
+        const decoded = jwt.verify(raw, secret);
+        return decoded as any;
+      } catch (e) {
+        console.warn('[API Auth] getSessionFromRequest manual JWT verify failed:', e?.message || e);
+        return null;
+      }
+    }
+
+    return null;
   } catch (e) {
     console.error('[API Auth] getSessionFromRequest error:', e);
     return null;

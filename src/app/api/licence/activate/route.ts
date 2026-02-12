@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prismaDB";
-import { validateRequest } from "@/lib/apiAuth";
+import { validateRequest, getSessionFromRequest } from "@/lib/apiAuth";
 
 export async function POST(req: NextRequest) {
-  const authError = validateRequest(req);
+  const authError = await validateRequest(req);
   if (authError) return authError;
 
   try {
     const { email, licenceKey } = await req.json();
+
+    // Require that the caller is authenticated with the same web account
+    const session = await getSessionFromRequest(req);
+    if (!session) {
+      return NextResponse.json({ success: false, error: 'Kérjük, jelentkezz be a webes fiókoddal a licenc aktiválásához.' }, { status: 401 });
+    }
+
+    // Ensure session email or licence matches
+    if (session.email && session.email !== email && session.licence !== licenceKey) {
+      return NextResponse.json({ success: false, error: 'A bejelentkezett fiók nem egyezik az aktiválandó licenccel.' }, { status: 403 });
+    }
 
     if (!email || !licenceKey) {
       return NextResponse.json(

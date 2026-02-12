@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 const VALID_API_KEYS = [
   process.env.DESKTOP_API_KEY,
-  process.env.DESKTOP_API_KEY_SECONDARY, 
+  process.env.DESKTOP_API_KEY_SECONDARY,
 ].filter(Boolean);
 
 /**
@@ -28,19 +29,19 @@ export function validateApiKey(req: NextRequest): NextResponse | null {
     );
   }
 
-  return null; 
+  return null;
 }
 
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 100; 
+const RATE_LIMIT_MAX_REQUESTS = 100;
 
 export function checkRateLimit(req: NextRequest): NextResponse | null {
   const forwardedFor = req.headers.get("x-forwarded-for");
   const realIp = req.headers.get("x-real-ip");
   const ip = forwardedFor?.split(",")[0]?.trim() || realIp || "unknown";
-  
+
   const clientId = req.headers.get("X-API-Key") || ip;
   const now = Date.now();
 
@@ -58,9 +59,9 @@ export function checkRateLimit(req: NextRequest): NextResponse | null {
     const retryAfter = Math.ceil((clientData.resetTime - now) / 1000);
     return NextResponse.json(
       { success: false, error: "Túl sok kérés. Próbáld újra később." },
-      { 
+      {
         status: 429,
-        headers: { "Retry-After": retryAfter.toString() }
+        headers: { "Retry-After": retryAfter.toString() },
       }
     );
   }
@@ -69,11 +70,41 @@ export function checkRateLimit(req: NextRequest): NextResponse | null {
   return null;
 }
 
-export function validateRequest(req: NextRequest): NextResponse | null {
+/**
+ * Ellenőrzi a bejövő kérést alap szinten (rate limit + API kulcs ha nincs session)
+ * Nem ellenőrzi, hogy a body-ban érkező email/licence megegyezik-e a sessionnel —
+ * ezt az egyes route-oknak kell ellenőrizniük a `getSessionFromRequest` használatával.
+ */
+export async function validateRequest(req: NextRequest): Promise<NextResponse | null> {
   const rateLimitError = checkRateLimit(req);
   if (rateLimitError) return rateLimitError;
+
+  const authHeader = req.headers.get("authorization");
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    // Van session token — engedjük tovább, részletes egyezést az egyes route-ok ellenőrzik
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (!token) {
+      return NextResponse.json({ success: false, error: "Érvénytelen bejelentkezés." }, { status: 401 });
+    }
+    return null;
+  }
+
+  // Ha nincs session, kötelező az API kulcs
   const authError = validateApiKey(req);
   if (authError) return authError;
 
   return null;
+}
+
+/**
+ * Visszaadja a next-auth JWT tokenjét (ha van), különböző route-ok ellenőrzésére
+ */
+export async function getSessionFromRequest(req: NextRequest) {
+  try {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    return token || null;
+  } catch (e) {
+    console.error('[API Auth] getSessionFromRequest error:', e);
+    return null;
+  }
 }

@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prismaDB";
-import { validateRequest } from "@/lib/apiAuth";
+import { validateRequest, getSessionFromRequest } from "@/lib/apiAuth";
 
 export async function POST(req: NextRequest) {
-  const authError = validateRequest(req);
+  const authError = await validateRequest(req);
   if (authError) return authError;
 
   try {
     const { activationEmail, emailInUse } = await req.json();
+
+    const session = await getSessionFromRequest(req);
+    if (!session) {
+      return NextResponse.json({ success: false, error: 'Be kell jelentkezni a webes fiókkal.' }, { status: 401 });
+    }
+
+    if (session.email && session.email !== activationEmail) {
+      return NextResponse.json({ success: false, error: 'A bejelentkezett fiók nem egyezik az activationEmail mezővel.' }, { status: 403 });
+    }
 
     if (!activationEmail || !emailInUse) {
       return NextResponse.json(
@@ -39,11 +48,20 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const authError = validateRequest(req);
+  const authError = await validateRequest(req);
   if (authError) return authError;
 
   try {
     const { activationEmail } = await req.json();
+
+    const session = await getSessionFromRequest(req);
+    if (!session) {
+      return NextResponse.json({ success: false, error: 'Be kell jelentkezni a webes fiókkal.' }, { status: 401 });
+    }
+
+    if (session.email && session.email !== activationEmail) {
+      return NextResponse.json({ success: false, error: 'A bejelentkezett fiók nem egyezik az activationEmail mezővel.' }, { status: 403 });
+    }
 
     if (!activationEmail) {
       return NextResponse.json(

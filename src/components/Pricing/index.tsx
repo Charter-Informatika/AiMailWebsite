@@ -57,7 +57,7 @@ const Pricing = () => {
             </label>
           </div>
 
-          <div className="-mx-6 flex flex-wrap justify-center">
+          <div className="-mx-6 flex flex-wrap justify-center items-stretch">
             {/* Ingyenes csomag */}
             <PricingItem
               price={{

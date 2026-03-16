@@ -30,8 +30,8 @@ export const PricingItem = ({ price, planType, buttonLabel = "Előfizetek", butt
   };
 
   return (
-    <div className="w-full px-6 md:w-1/2 lg:w-1/3">
-      <div className="wow fadeInUp shadow-card dark:bg-dark dark:shadow-card-dark relative mb-10 rounded-xl bg-white px-9 py-10 lg:mb-4 lg:px-7 xl:px-9">
+    <div className="w-full px-6 md:w-1/2 lg:w-1/3 flex">
+      <div className="wow fadeInUp shadow-card dark:bg-dark dark:shadow-card-dark relative mb-10 rounded-xl bg-white px-9 py-10 lg:mb-4 lg:px-7 xl:px-9 flex flex-col h-full min-h-[520px]">
         {price.nickname === "Korlátlan" && (
           <span className="text-primary absolute top-5 right-5 text-sm font-medium underline">
               Legnépszerűbb

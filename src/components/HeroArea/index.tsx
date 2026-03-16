@@ -11,7 +11,7 @@ const HeroArea = () => {
   return (
     <>
       <section id="home" className="pt-[165px] font-pixellari">
-        <div className="container lg:max-w-[1305px] lg:px-10">
+        <div className="container lg:max-w-[1600px] lg:px-10">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-6/12">
               <div
@@ -47,26 +47,25 @@ const HeroArea = () => {
 
             <div className="w-full px-4 lg:w-6/12">
               <div
-                className="wow fadeInUp relative z-10 mx-auto w-full max-w-[790px]"
+                className="wow fadeInUp relative z-10 mx-auto w-full"
                 data-wow-delay=".3s"
               >
                 <Image
-                  width={990}
-                  height={546}
+                  width={1200}
+                  height={700}
                   src={"/images/hero/dashboard.png"}
                   alt="hero image"
                   className="block dark:hidden"
-            
+                  style={{ width: "100%", height: "auto" }}
                 />
                 <Image
-                  width={990}
-                  height={546}
+                  width={1200}
+                  height={700}
                   src={"/images/hero/dashboard.png"}
                   alt="hero image"
                   className="hidden dark:block"
-                  style={{ width: "auto", height: "auto" }}
+                  style={{ width: "100%", height: "auto" }}
                 />
-                
               </div>
             </div>
           </div>

@@ -41,16 +41,16 @@ const Screens = () => {
             data-wow-delay=".2s"
           >
             <Swiper
-              className="swiper mySwiper relative z-20"
+              className="swiper mySwiper relative z-20 h-[600px]"
               modules={[Navigation]}
               navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".screens-swiper-next",
+                prevEl: ".screens-swiper-prev",
               }}
               loop={true}
               slidesPerView={1}
               spaceBetween={40}
-              autoHeight={true}
+              autoHeight={false}
               breakpoints={{
                 640: {
                   slidesPerView: 1,
@@ -69,21 +69,21 @@ const Screens = () => {
 
               {/* Slide 1: level_szerkeztes */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/inbox.png"}
                     alt="screenshot 2"
-                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
                   />
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/inbox.png"}
                     alt="screenshot 2 dark"
-                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
                   />
                 </div>
@@ -91,21 +91,21 @@ const Screens = () => {
 
               {/* Slide 2: fooldal */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/inbox2.png"}
                     alt="screenshot 1"
-                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
                   />
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/inbox2.png"}
                     alt="screenshot 1 dark"
-                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
                   />
                 </div>
@@ -113,21 +113,21 @@ const Screens = () => {
               
               {/* Slide 3: level_szerkezet */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/pre.png"}
                     alt="screenshot 3"
-                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
                   />
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/pre.png"}
                     alt="screenshot 3 dark"
-                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
                   />
                 </div>
@@ -135,21 +135,21 @@ const Screens = () => {
 
               {/* Slide 4: level_be */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/pre2.png"}
                     alt="screenshot 4"
-                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
                   />
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/pre2.png"}
                     alt="screenshot 4 dark"
-                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
                   />
                 </div>
@@ -157,21 +157,21 @@ const Screens = () => {
 
               {/* Slide 4: level_be */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/data.png"}
                     alt="screenshot 4"
-                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
                   />
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/data.png"}
                     alt="screenshot 4 dark"
-                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
                   />
                 </div>
@@ -179,28 +179,30 @@ const Screens = () => {
 
               {/* Slide 4: level_be */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/struct.png"}
                     alt="screenshot 4"
-                    className="mx-auto w-full rounded-2xl block dark:hidden mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl block dark:hidden mb-0"
                     onLoad={handleImageLoad}
                   />
                   <Image
                     width={900}
-                    height={1800}
+                    height={600}
                     src={"/images/screens/struct.png"}
                     alt="screenshot 4 dark"
-                    className="mx-auto w-full rounded-2xl hidden dark:block mb-0"
+                    className="mx-auto w-full h-full object-contain rounded-2xl hidden dark:block mb-0"
                     onLoad={handleImageLoad}
                   />
                 </div>
               </SwiperSlide>
 
-              <div className="flex items-center justify-center gap-x-4 pt-10">
-                <button className="swiper-button-prev">
+            </Swiper>
+
+            <div className="flex items-center justify-center gap-x-4 pt-8">
+                <button className="screens-swiper-prev border-body text-body hover:border-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border hover:text-white transition-colors">
                   <svg
                     width="20"
                     height="20"
@@ -226,7 +228,7 @@ const Screens = () => {
                     </defs>
                   </svg>
                 </button>
-                <button className="swiper-button-next">
+                <button className="screens-swiper-next border-body text-body hover:border-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border hover:text-white transition-colors">
                   <svg
                     width="20"
                     height="20"
@@ -247,8 +249,7 @@ const Screens = () => {
                     </defs>
                   </svg>
                 </button>
-              </div>
-            </Swiper>
+            </div>
           </div>
         </div>
 

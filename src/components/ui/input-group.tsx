@@ -5,7 +5,7 @@ import { InputHTMLAttributes, useId } from "react";
 type PropsType = {
   label?: string;
   errorMessages?: string;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "id">;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "className">;
 
 export function InputGroup({ label, errorMessages, ...props }: PropsType) {
   const inputId = useId();

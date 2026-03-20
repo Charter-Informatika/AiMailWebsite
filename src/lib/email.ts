@@ -25,6 +25,8 @@ export const sendEmail = async (data: EmailPayload) => {
       user: process.env.EMAIL_SERVER_USER,
       pass: process.env.EMAIL_SERVER_PASSWORD,
     },
+    connectionTimeout: 5000,
+    socketTimeout: 5000,
   };
 
   if (!smtpOptions.host) {
@@ -35,10 +37,22 @@ export const sendEmail = async (data: EmailPayload) => {
     throw new Error("Missing EMAIL_FROM environment variable");
   }
 
+  console.log(`[Email] Connecting to SMTP ${smtpOptions.host}:${smtpOptions.port}`);
+
   const transporter = nodemailer.createTransport({
     ...smtpOptions,
   });
 
+  // Verify SMTP connection upfront to fail fast
+  try {
+    await transporter.verify();
+    console.log('[Email] SMTP connection verified successfully');
+  } catch (verifyErr) {
+    console.error('[Email] SMTP verification failed:', verifyErr);
+    throw new Error(`SMTP connection failed: ${String(verifyErr).substring(0, 200)}`);
+  }
+
+  console.log(`[Email] Sending email to ${data.to}`);
   return await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     ...data,

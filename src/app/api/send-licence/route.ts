@@ -24,14 +24,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Licence not found' }, { status: 404 });
     }
     try {
+      console.log(`[send-licence] Initiating email send to ${email}`);
       await sendEmail({
         to: email,
         subject: 'Az Ön licensz kódja',
         html: `<p>Kedves felhasználó!</p><p>Az Ön licensz kódja: <b>${user.licence}</b></p>`
       });
+      console.log(`[send-licence] Email successfully sent to ${email}`);
     } catch (mailErr) {
-      console.error('Email sending error:', mailErr);
-      return NextResponse.json({ error: 'Email sending error', details: String(mailErr) }, { status: 500 });
+      console.error('[send-licence] Email sending error:', mailErr);
+      const errorMsg = String(mailErr).substring(0, 300);
+      return NextResponse.json({ 
+        error: 'Email sending failed', 
+        details: errorMsg,
+        hint: 'Check SMTP server configuration and connectivity'
+      }, { status: 500 });
     }
     return NextResponse.json({ success: true });
   } catch (e) {

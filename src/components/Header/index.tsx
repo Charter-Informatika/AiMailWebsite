@@ -229,7 +229,7 @@ const Header = () => {
               {session ? (
                 <div className="hidden items-center sm:flex">
                   <p className="mx-3 text-black dark:text-white">
-                    {session?.user?.name}
+                    {session?.user?.email || session?.user?.name}
                   </p>
 
                   <button

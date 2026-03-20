@@ -41,7 +41,7 @@ const Screens = () => {
             data-wow-delay=".2s"
           >
             <Swiper
-              className="swiper mySwiper relative z-20 h-[600px]"
+              className="swiper mySwiper relative z-20 h-[600px] pb-8"
               modules={[Navigation]}
               navigation={{
                 nextEl: ".screens-swiper-next",
@@ -135,7 +135,7 @@ const Screens = () => {
 
               {/* Slide 4: level_be */}
               <SwiperSlide>
-                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-0 h-[600px] flex items-center justify-center overflow-hidden">
+                <div className="xs:max-w-[1800px] mx-auto w-full max-w-[900px] mb-8 h-[600px] flex items-center justify-center overflow-hidden">
                   <Image
                     width={900}
                     height={600}
@@ -201,8 +201,8 @@ const Screens = () => {
 
             </Swiper>
 
-            <div className="flex items-center justify-center gap-x-4 pt-8">
-                <button className="screens-swiper-prev border-body text-body hover:border-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border hover:text-white transition-colors">
+            <div className="flex items-center justify-center gap-x-4 px-4 pt-8 sm:px-0">
+              <button className="screens-swiper-prev border-body text-body hover:border-primary hover:bg-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors hover:text-white">
                   <svg
                     width="20"
                     height="20"
@@ -228,7 +228,7 @@ const Screens = () => {
                     </defs>
                   </svg>
                 </button>
-                <button className="screens-swiper-next border-body text-body hover:border-primary hover:bg-primary flex h-10 w-10 items-center justify-center rounded-full border hover:text-white transition-colors">
+                <button className="screens-swiper-next border-body text-body hover:border-primary hover:bg-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors hover:text-white">
                   <svg
                     width="20"
                     height="20"

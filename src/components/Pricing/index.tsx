@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Price } from "@/types/priceItem";
 
@@ -10,7 +10,38 @@ import toast from "react-hot-toast";
 
 const Pricing = () => {
   const [planType, setPlanType] = useState(false);
+  const [showTrialSuccessModal, setShowTrialSuccessModal] = useState(false);
   const { data: session } = useSession();
+  const modalTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openTrialSuccessModal = () => {
+    setShowTrialSuccessModal(true);
+
+    if (modalTimeoutRef.current) {
+      clearTimeout(modalTimeoutRef.current);
+    }
+
+    modalTimeoutRef.current = setTimeout(() => {
+      setShowTrialSuccessModal(false);
+    }, 12000);
+  };
+
+  const closeTrialSuccessModal = () => {
+    setShowTrialSuccessModal(false);
+
+    if (modalTimeoutRef.current) {
+      clearTimeout(modalTimeoutRef.current);
+      modalTimeoutRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (modalTimeoutRef.current) {
+        clearTimeout(modalTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -90,12 +121,13 @@ const Pricing = () => {
                     try {
                       const res = await fetch('/api/send-licence', { method: 'POST' });
                       if (res.ok) {
-                        toast.success('A licence kódot elküldtük az email címedre!');
+                        openTrialSuccessModal();
+                        toast.success('A licenc kódot elküldtük az email címedre!', { duration: 6000 });
                       } else {
-                        toast.error('Nem sikerült elküldeni a licence kódot.');
+                        toast.error('Nem sikerült elküldeni a licenc kódot.', { duration: 5000 });
                       }
                     } catch {
-                      toast.error('Nem sikerült elküldeni a licence kódot.');
+                      toast.error('Nem sikerült elküldeni a licenc kódot.', { duration: 5000 });
                     }
                   } else {
                     toast.error('A próbaidőszakod már lejárt.');
@@ -147,6 +179,33 @@ const Pricing = () => {
           </div>
         </div>
       </section>
+
+      {showTrialSuccessModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Sikeres próbaindítás"
+            className="w-full max-w-md rounded-xl border border-white/20 bg-white p-6 shadow-2xl"
+          >
+            <h3 className="mb-3 text-2xl font-bold text-black">Kész!</h3>
+            <p className="mb-2 text-base text-black">
+              A licenc kódot elküldtük az email címedre.
+            </p>
+            <p className="mb-5 text-base text-black">
+              A program letöltése elindult. Ha nem indul el automatikusan, frissítsd az oldalt, majd próbáld újra.
+            </p>
+
+            <button
+              type="button"
+              onClick={closeTrialSuccessModal}
+              className="inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary/90"
+            >
+              Rendben
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
